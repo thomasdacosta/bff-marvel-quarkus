@@ -1,4 +1,4 @@
-package br.com.thomasdacosta.utils;
+package br.com.marvel.utils;
 
 import br.com.marvel.resource.dto.Pagination;
 import org.apache.commons.lang3.StringUtils;

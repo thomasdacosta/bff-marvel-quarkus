@@ -4,6 +4,8 @@
 
 .DS_Store
 
+logs/*
+
 ### Eclipse ###
 obj/**
 .metadata

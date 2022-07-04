@@ -1,11 +1,11 @@
-package br.com.thomasdacosta.client.impl;
+package br.com.marvel.client.impl;
 
 import br.com.marvel.client.dto.InlineResponse200;
 import br.com.marvel.resource.dto.Pagination;
 import br.com.marvel.resource.dto.characters.MarvelCharacter;
 import br.com.marvel.resource.dto.characters.ThumbnailCharacter;
 import br.com.marvel.resource.dto.characters.UrlCharacter;
-import br.com.thomasdacosta.client.MarvelApiClient;
+import br.com.marvel.client.MarvelApiClient;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 

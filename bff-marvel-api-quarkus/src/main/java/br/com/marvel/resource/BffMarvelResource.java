@@ -1,10 +1,10 @@
-package br.com.thomasdacosta.resource;
+package br.com.marvel.resource;
 
 import br.com.marvel.resource.dto.Pagination;
 import br.com.marvel.resource.dto.characters.MarvelCharacter;
-import br.com.thomasdacosta.client.impl.MarvelApiClientImpl;
-import br.com.thomasdacosta.resource.exception.CharactersNotFoundException;
-import br.com.thomasdacosta.utils.PaginationUtils;
+import br.com.marvel.client.impl.MarvelApiClientImpl;
+import br.com.marvel.resource.exception.CharactersNotFoundException;
+import br.com.marvel.utils.PaginationUtils;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -20,6 +20,7 @@ public class BffMarvelResource {
     MarvelApiClientImpl marvelApiClientImpl;
 
     // TODO Incluir um erro de BadRequest caso o parametro não exista
+    // TODO incluir uma quantidade de caractes para usar o Hibernate Validator ou um range
     @GET
     @Path("/characters")
     public Response findCharacterse(@QueryParam("name") String name,

@@ -1,4 +1,4 @@
-package br.com.thomasdacosta.client;
+package br.com.marvel.client;
 
 import br.com.marvel.client.dto.InlineResponse200;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
