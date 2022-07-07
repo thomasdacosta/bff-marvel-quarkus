@@ -2,39 +2,52 @@ package br.com.marvel.resource;
 
 import br.com.marvel.resource.dto.Pagination;
 import br.com.marvel.resource.dto.characters.MarvelCharacter;
-import br.com.marvel.client.impl.MarvelApiClientImpl;
 import br.com.marvel.resource.exception.CharactersNotFoundException;
+import br.com.marvel.service.MarvelCharacterService;
 import br.com.marvel.utils.PaginationUtils;
 
 import javax.inject.Inject;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
 
 @Path("/")
+@Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class BffMarvelResource {
 
     @Inject
-    MarvelApiClientImpl marvelApiClientImpl;
+    MarvelCharacterService marvelCharacterService;
 
-    // TODO Incluir um erro de BadRequest caso o parametro não exista
-    // TODO incluir uma quantidade de caractes para usar o Hibernate Validator ou um range
     @GET
     @Path("/characters")
     public Response findCharacterse(@QueryParam("name") String name,
                                     @QueryParam("nameStartsWith") String nameStartsWith,
-                                    @HeaderParam("limit") @DefaultValue("10") BigDecimal limit,
-                                    @HeaderParam("offset") @DefaultValue("1") BigDecimal offset) {
-        Pagination pagination = marvelApiClientImpl.listCharacters(name, nameStartsWith, limit, offset);
-        return response(pagination);
+                                    @HeaderParam("offset") @DefaultValue("1") @Min(0) BigDecimal offset,
+                                    @HeaderParam("limit") @DefaultValue("10") @Max(100) BigDecimal limit) {
+        return response(marvelCharacterService.listCharacters(name, nameStartsWith, offset, limit));
     }
 
+    // TODO validar os campos do JSON tipo
     @POST
     @Path("/characters")
     public Response saveCharacters(MarvelCharacter marvelCharacter) {
-        return Response.ok(new MarvelCharacter()).build();
+        return Response.ok(marvelCharacterService.save(marvelCharacter)).build();
+    }
+
+    @PUT
+    @Path("/characters")
+    public Response updateCharacters(MarvelCharacter marvelCharacter) {
+        return null;
+    }
+
+    @DELETE
+    @Path("/characters")
+    public Response deleteCharacters(MarvelCharacter marvelCharacter) {
+        return null;
     }
 
     private Response response(Pagination pagination) {

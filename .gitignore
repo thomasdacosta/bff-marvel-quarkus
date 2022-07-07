@@ -5,6 +5,7 @@
 .DS_Store
 
 logs/*
+*/data/*
 
 ### Eclipse ###
 obj/**
