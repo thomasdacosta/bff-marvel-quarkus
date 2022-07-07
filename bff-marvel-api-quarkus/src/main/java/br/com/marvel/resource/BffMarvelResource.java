@@ -24,7 +24,7 @@ public class BffMarvelResource {
 
     @GET
     @Path("/characters")
-    public Response findCharacterse(@QueryParam("name") String name,
+    public Response findCharacters(@QueryParam("name") String name,
                                     @QueryParam("nameStartsWith") String nameStartsWith,
                                     @HeaderParam("offset") @DefaultValue("1") @Min(0) BigDecimal offset,
                                     @HeaderParam("limit") @DefaultValue("10") @Max(100) BigDecimal limit) {
