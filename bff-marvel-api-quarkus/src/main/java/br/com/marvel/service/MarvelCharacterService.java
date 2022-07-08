@@ -40,7 +40,15 @@ public class MarvelCharacterService {
         return marvelCharacterRepository.save(marvelCharacter);
     }
 
-    public Pagination listCharacters(String name, String nameStartsWith, BigDecimal offset, BigDecimal limit) {
+    public MarvelCharacter update(MarvelCharacter marvelCharacter) {
+        return marvelCharacterRepository.update(marvelCharacter);
+    }
+
+    public void delete(Long id) {
+        marvelCharacterRepository.delete(id);
+    }
+
+    public Pagination findCharactersLocal(String name, String nameStartsWith, BigDecimal offset, BigDecimal limit) {
         List<MarvelCharacter> marvelCharacters;
 
         if (!StringUtils.isEmpty(name))
@@ -60,44 +68,49 @@ public class MarvelCharacterService {
             pagination.setCount(BigDecimal.valueOf(marvelCharacters.size()));
             return pagination;
         } else {
-            InlineResponse200 listCharacters = marvelApiClient.listCharacters(ts, apiKey, hash, name, nameStartsWith, null, null, null,
-                    null, null, null, limit, offset);
+            return null;
+        }
+    }
 
-            Pagination pagination = listCharacters.getData();
+    public Pagination findCharactersApi(String name, String nameStartsWith, BigDecimal offset, BigDecimal limit) {
+        InlineResponse200 listCharacters = marvelApiClient.listCharacters(ts, apiKey, hash, name, nameStartsWith, null, null, null,
+                null, null, null, limit, offset);
 
-            if (!listCharacters.getData().getResults().isEmpty()) {
-                List<MarvelCharacter> characters = listCharacters.getData().getResults().stream().map(c -> {
-                    MarvelCharacter marvelCharacter = new MarvelCharacter();
+        Pagination pagination = listCharacters.getData();
 
-                    marvelCharacter.setId(c.getId());
-                    marvelCharacter.setName(c.getName());
-                    marvelCharacter.setDescription(c.getDescription());
-                    marvelCharacter.setModified(c.getModified());
+        if (!listCharacters.getData().getResults().isEmpty()) {
+            List<MarvelCharacter> characters = listCharacters.getData().getResults().stream().map(c -> {
+                MarvelCharacter marvelCharacter = new MarvelCharacter();
 
-                    ThumbnailCharacter thumbnailCharacter = new ThumbnailCharacter();
-                    thumbnailCharacter.setUrl(c.getThumbnail().getPath());
-                    thumbnailCharacter.setExtension(c.getThumbnail().getExtension());
+                marvelCharacter.setId(c.getId());
+                marvelCharacter.setName(c.getName());
+                marvelCharacter.setDescription(c.getDescription());
+                marvelCharacter.setModified(c.getModified());
 
-                    marvelCharacter.setThumbnail(thumbnailCharacter);
+                ThumbnailCharacter thumbnailCharacter = new ThumbnailCharacter();
+                thumbnailCharacter.setUrl(c.getThumbnail().getPath());
+                thumbnailCharacter.setExtension(c.getThumbnail().getExtension());
 
-                    List<UrlCharacter> urlCharacters = c.getUrls().stream().map(u -> {
-                        UrlCharacter urlCharacter = new UrlCharacter();
-                        urlCharacter.setType(u.getType());
-                        urlCharacter.setUrl(u.getUrl());
-                        return urlCharacter;
-                    }).collect(Collectors.toList());
+                marvelCharacter.setThumbnail(thumbnailCharacter);
 
-                    marvelCharacter.setUrlCharacters(urlCharacters);
-
-                    return marvelCharacter;
+                List<UrlCharacter> urlCharacters = c.getUrls().stream().map(u -> {
+                    UrlCharacter urlCharacter = new UrlCharacter();
+                    urlCharacter.setType(u.getType());
+                    urlCharacter.setUrl(u.getUrl());
+                    return urlCharacter;
                 }).collect(Collectors.toList());
 
-                pagination.setData(characters);
-                return pagination;
-            } else {
-                return null;
-            }
+                marvelCharacter.setUrlCharacters(urlCharacters);
+
+                return marvelCharacter;
+            }).collect(Collectors.toList());
+
+            pagination.setData(characters);
+            return pagination;
+        } else {
+            return null;
         }
+
     }
 
 }

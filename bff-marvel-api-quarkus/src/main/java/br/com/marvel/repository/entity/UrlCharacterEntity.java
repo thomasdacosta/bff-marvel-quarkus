@@ -1,16 +1,25 @@
 package br.com.marvel.repository.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name="url_character")
 public class UrlCharacterEntity extends PanacheEntityBase {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(generator = "sequence-generator")
+	@GenericGenerator(
+			name = "sequence-generator",
+			strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+			parameters = {
+					@org.hibernate.annotations.Parameter(name = "sequence_name", value = "user_sequence"),
+					@org.hibernate.annotations.Parameter(name = "initial_value", value = "1000"),
+					@org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
+			}
+	)
 	private Long id;
 
 	@Column(name = "type")
@@ -18,12 +27,6 @@ public class UrlCharacterEntity extends PanacheEntityBase {
 
 	@Column(name = "url")
 	private String url;
-
-	@Column(name = "dateModified")
-	private Date dateModified;
-
-	@Column(name = "dateCreated")
-	private Date dateCreated;
 
 	public Long getId() {
 		return id;
@@ -47,22 +50,6 @@ public class UrlCharacterEntity extends PanacheEntityBase {
 
 	public void setUrl(String url) {
 		this.url = url;
-	}
-
-	public Date getDateModified() {
-		return dateModified;
-	}
-
-	public void setDateModified(Date dateModified) {
-		this.dateModified = dateModified;
-	}
-
-	public Date getDateCreated() {
-		return dateCreated;
-	}
-
-	public void setDateCreated(Date dateCreated) {
-		this.dateCreated = dateCreated;
 	}
 
 }

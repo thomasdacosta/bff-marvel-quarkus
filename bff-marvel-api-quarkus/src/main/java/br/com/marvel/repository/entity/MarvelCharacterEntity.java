@@ -1,6 +1,7 @@
 package br.com.marvel.repository.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,7 +12,16 @@ import java.util.Set;
 public class MarvelCharacterEntity extends PanacheEntityBase {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(generator = "sequence-generator")
+	@GenericGenerator(
+			name = "sequence-generator",
+			strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+			parameters = {
+					@org.hibernate.annotations.Parameter(name = "sequence_name", value = "user_sequence"),
+					@org.hibernate.annotations.Parameter(name = "initial_value", value = "1000"),
+					@org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
+			}
+	)
 	private Long id;
 
 	@Column(name = "name")
@@ -20,11 +30,11 @@ public class MarvelCharacterEntity extends PanacheEntityBase {
 	@Column(name = "description")
 	private String description;
 
-	@Column(name = "dateModified")
-	private Date dateModified;
-
 	@Column(name = "dateCreated")
 	private Date dateCreated;
+
+	@Column(name = "dateModified")
+	private Date dateModified;
 
 	@OneToOne
 	@JoinColumn(name = "id_thumbnail_character")
@@ -74,20 +84,20 @@ public class MarvelCharacterEntity extends PanacheEntityBase {
 		this.description = description;
 	}
 
-	public Date getDateModified() {
-		return dateModified;
-	}
-
-	public void setDateModified(Date dateModified) {
-		this.dateModified = dateModified;
-	}
-
 	public Date getDateCreated() {
 		return dateCreated;
 	}
 
 	public void setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
+	}
+
+	public Date getDateModified() {
+		return dateModified;
+	}
+
+	public void setDateModified(Date dateModified) {
+		this.dateModified = dateModified;
 	}
 
 }
