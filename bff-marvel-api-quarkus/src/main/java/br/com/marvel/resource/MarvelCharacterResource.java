@@ -28,7 +28,7 @@ public class MarvelCharacterResource {
     @Path("/characters/local")
     public Response findCharactersLocal(@QueryParam("name") String name,
                                     @QueryParam("nameStartsWith") String nameStartsWith,
-                                    @HeaderParam("offset") @DefaultValue("1") @Min(0) BigDecimal offset,
+                                    @HeaderParam("offset") @DefaultValue("0") @Min(0) BigDecimal offset,
                                     @HeaderParam("limit") @DefaultValue("10") @Max(100) BigDecimal limit) {
         return response(marvelCharacterService.findCharactersLocal(name, nameStartsWith, offset, limit));
     }
@@ -37,7 +37,7 @@ public class MarvelCharacterResource {
     @Path("/characters/api")
     public Response findCharactersApi(@QueryParam("name") String name,
                                    @QueryParam("nameStartsWith") String nameStartsWith,
-                                   @HeaderParam("offset") @DefaultValue("1") @Min(0) BigDecimal offset,
+                                   @HeaderParam("offset") @DefaultValue("0") @Min(0) BigDecimal offset,
                                    @HeaderParam("limit") @DefaultValue("10") @Max(100) BigDecimal limit) {
         return response(marvelCharacterService.findCharactersApi(name, nameStartsWith, offset, limit));
     }

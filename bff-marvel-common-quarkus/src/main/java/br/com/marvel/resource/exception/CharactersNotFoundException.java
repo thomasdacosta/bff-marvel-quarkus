@@ -4,7 +4,9 @@ import javax.ws.rs.WebApplicationException;
 
 public class CharactersNotFoundException extends WebApplicationException {
 
-    public CharactersNotFoundException(String message) {
+	private static final long serialVersionUID = -5560345230462781018L;
+
+	public CharactersNotFoundException(String message) {
         super(message);
     }
 

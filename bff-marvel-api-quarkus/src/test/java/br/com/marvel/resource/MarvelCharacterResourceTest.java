@@ -13,6 +13,8 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static javax.ws.rs.core.Response.Status;
@@ -23,6 +25,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @TestMethodOrder(OrderAnnotation.class)
 public class MarvelCharacterResourceTest {
 
+    private static final String CHARACTER_1_JSON = "json/character1.json";
+    private static final String CHARACTER_2_JSON = "json/character2.json";
+    private static final String CHARACTER_3_JSON = "json/character3.json";
+
     @BeforeEach
     @Transactional
     public void before() {
@@ -31,11 +37,15 @@ public class MarvelCharacterResourceTest {
         ThumbnailCharacterEntity.deleteAll();
     }
 
-    @Test
-    @Order(1)
-    @DisplayName("1 - Criando Personagem")
-    public void testCreateCharacter() {
-        Response response = createCharacter("json/character2.json");
+    private MarvelCharacter createCharacter(String file) {
+        Response response = given()
+                .contentType(ContentType.JSON)
+                .body(ResourceLoader.loadFile(file))
+                .when()
+                .post("/characters")
+                .then()
+                .extract().response();
+
         MarvelCharacter marvelCharacter = (MarvelCharacter) JsonUtils
                 .createObject(response.body().print(), MarvelCharacter.class);
 
@@ -44,22 +54,22 @@ public class MarvelCharacterResourceTest {
         assertNotNull(marvelCharacter.getThumbnail());
         assertEquals(3, marvelCharacter.getUrlCharacters().size());
         assertEquals(Status.CREATED.getStatusCode(), response.statusCode());
+
+        return marvelCharacter;
+    }
+
+    @Test
+    @Order(1)
+    @DisplayName("1 - Criando Personagem")
+    public void testCreateCharacter() {
+        createCharacter(CHARACTER_2_JSON);
     }
 
     @Test
     @Order(2)
     @DisplayName("2 - Atualizando Personagem")
     public void testUpdateCharacter() {
-        Response response = createCharacter("json/character3.json");
-        MarvelCharacter marvelCharacter = (MarvelCharacter) JsonUtils
-                .createObject(response.body().print(), MarvelCharacter.class);
-
-        assertNotNull(marvelCharacter);
-        assertNotNull(marvelCharacter.getId());
-        assertNotNull(marvelCharacter.getThumbnail());
-        assertEquals(3, marvelCharacter.getUrlCharacters().size());
-        assertEquals(Status.CREATED.getStatusCode(), response.statusCode());
-
+        MarvelCharacter marvelCharacter = createCharacter(CHARACTER_3_JSON);
         marvelCharacter.setName("Spider Man");
 
         Response responseUpdate = given()
@@ -77,22 +87,33 @@ public class MarvelCharacterResourceTest {
 
     @Test
     @Order(3)
-    @DisplayName("3 - Excluindo Personagem")
-    public void testDeleteCharacter() {
-        Response response = createCharacter("json/character1.json");
+    @DisplayName("3 - Atualizando Personagem Não Existe")
+    public void testUpdateCharacterNotFound() {
         MarvelCharacter marvelCharacter = (MarvelCharacter) JsonUtils
-                .createObject(response.body().print(), MarvelCharacter.class);
+                .createObject(ResourceLoader.loadFile(CHARACTER_1_JSON), MarvelCharacter.class);
 
-        assertNotNull(marvelCharacter);
-        assertNotNull(marvelCharacter.getId());
-        assertNotNull(marvelCharacter.getThumbnail());
-        assertEquals(3, marvelCharacter.getUrlCharacters().size());
-        assertEquals(Status.CREATED.getStatusCode(), response.statusCode());
+        Response responseUpdate = given()
+                .contentType(ContentType.JSON)
+                .body(JsonUtils.createJson(marvelCharacter))
+                .when()
+                .put("/characters")
+                .then()
+                .extract().response();
+
+        assertEquals(Status.NOT_FOUND.getStatusCode(), responseUpdate.statusCode());
+    }
+
+    @Test
+    @Order(4)
+    @DisplayName("4 - Excluindo Personagem")
+    public void testDeleteCharacter() {
+        MarvelCharacter marvelCharacter = createCharacter(CHARACTER_1_JSON);
 
         Response responseUpdate = given()
                 .contentType(ContentType.JSON)
                 .when()
-                .delete("/characters/" + marvelCharacter.getId())
+                .pathParam("id", marvelCharacter.getId())
+                .delete("/characters/{id}")
                 .then()
                 .extract().response();
 
@@ -101,21 +122,76 @@ public class MarvelCharacterResourceTest {
         Response responseSearch = given()
                 .contentType(ContentType.JSON)
                 .when()
-                .get("/characters/local?name=" + marvelCharacter.getName())
+                .param("name", marvelCharacter.getName())
+                .get("/characters/local")
                 .then()
                 .extract().response();
 
         assertEquals(Status.NOT_FOUND.getStatusCode(), responseSearch.statusCode());
     }
 
-    private Response createCharacter(String file) {
-        return given()
+    @Test
+    @Order(5)
+    @DisplayName("5 - Excluindo Personagem Não Existe")
+    public void testDeleteCharacterNotFound() {
+        Response responseUpdate = given()
                 .contentType(ContentType.JSON)
-                .body(ResourceLoader.loadFile(file))
                 .when()
-                .post("/characters")
+                .delete("/characters/42")
                 .then()
                 .extract().response();
+
+        assertEquals(Status.NOT_FOUND.getStatusCode(), responseUpdate.statusCode());
+    }
+
+    @Test
+    @Order(6)
+    @SuppressWarnings("rawtypes")
+    @DisplayName("6 - Pesquisando Personagem Por Nome")
+    public void testFindByName() {
+        MarvelCharacter marvelCharacter = createCharacter(CHARACTER_1_JSON);
+
+        Response responseSearch = given()
+                .contentType(ContentType.JSON)
+                .when()
+                .param("name", marvelCharacter.getName())
+                .get("/characters/local")
+                .then()
+                .extract().response();
+
+        assertEquals(Status.OK.getStatusCode(), responseSearch.statusCode());
+        List<String> name = responseSearch.jsonPath().getList("name");
+        List<ArrayList> urls = responseSearch.jsonPath().getList("urls");
+
+        assertEquals("Thor", name.get(0));
+        assertEquals(3, urls.get(0).size());
+    }
+
+    @Test
+    @Order(7)
+    @SuppressWarnings("rawtypes")
+    @DisplayName("7 - Pesquisando Personagem Por Inicio do Nome")
+    public void testFindByNameStartsWith() {
+        createCharacter(CHARACTER_1_JSON);
+        createCharacter(CHARACTER_2_JSON);
+        createCharacter(CHARACTER_3_JSON);
+
+        Response responseSearch = given()
+                .contentType(ContentType.JSON)
+                .when()
+                .param("nameStartsWith", "Thor")
+                .get("/characters/local")
+                .then()
+                .extract().response();
+
+        assertEquals(Status.OK.getStatusCode(), responseSearch.statusCode());
+        List<String> name = responseSearch.jsonPath().getList("name");
+        List<ArrayList> urls = responseSearch.jsonPath().getList("urls");
+
+        assertEquals(1, name.stream().filter(p -> p.equals("Thor")).count());
+        assertEquals(1, name.stream().filter(p -> p.equals("Thor (Goddess of Thunder)")).count());
+        assertEquals(1, name.stream().filter(p -> p.equals("Thor (MAA)")).count());
+        assertEquals(3, urls.size());
     }
 
 }
