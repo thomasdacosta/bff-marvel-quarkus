@@ -37,27 +37,6 @@ public class MarvelCharacterResourceTest {
         ThumbnailCharacterEntity.deleteAll();
     }
 
-    private MarvelCharacter createCharacter(String file) {
-        Response response = given()
-                .contentType(ContentType.JSON)
-                .body(ResourceLoader.loadFile(file))
-                .when()
-                .post("/characters")
-                .then()
-                .extract().response();
-
-        MarvelCharacter marvelCharacter = (MarvelCharacter) JsonUtils
-                .createObject(response.body().print(), MarvelCharacter.class);
-
-        assertNotNull(marvelCharacter);
-        assertNotNull(marvelCharacter.getId());
-        assertNotNull(marvelCharacter.getThumbnail());
-        assertEquals(3, marvelCharacter.getUrlCharacters().size());
-        assertEquals(Status.CREATED.getStatusCode(), response.statusCode());
-
-        return marvelCharacter;
-    }
-
     @Test
     @Order(1)
     @DisplayName("1 - Criando Personagem")
@@ -192,6 +171,27 @@ public class MarvelCharacterResourceTest {
         assertEquals(1, name.stream().filter(p -> p.equals("Thor (Goddess of Thunder)")).count());
         assertEquals(1, name.stream().filter(p -> p.equals("Thor (MAA)")).count());
         assertEquals(3, urls.size());
+    }
+
+    private MarvelCharacter createCharacter(String file) {
+        Response response = given()
+                .contentType(ContentType.JSON)
+                .body(ResourceLoader.loadFile(file))
+                .when()
+                .post("/characters")
+                .then()
+                .extract().response();
+
+        MarvelCharacter marvelCharacter = (MarvelCharacter) JsonUtils
+                .createObject(response.body().print(), MarvelCharacter.class);
+
+        assertNotNull(marvelCharacter);
+        assertNotNull(marvelCharacter.getId());
+        assertNotNull(marvelCharacter.getThumbnail());
+        assertEquals(3, marvelCharacter.getUrlCharacters().size());
+        assertEquals(Status.CREATED.getStatusCode(), response.statusCode());
+
+        return marvelCharacter;
     }
 
 }
