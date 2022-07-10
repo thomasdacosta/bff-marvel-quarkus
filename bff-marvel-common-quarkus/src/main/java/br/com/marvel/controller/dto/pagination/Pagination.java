@@ -1,4 +1,4 @@
-package br.com.marvel.resource.dto;
+package br.com.marvel.controller.dto.pagination;
 
 import java.math.BigDecimal;
 

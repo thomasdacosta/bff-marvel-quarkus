@@ -1,7 +1,7 @@
 package br.com.marvel.application.ports.in;
 
-import br.com.marvel.resource.dto.Pagination;
-import br.com.marvel.resource.dto.characters.MarvelCharacter;
+import br.com.marvel.controller.dto.pagination.Pagination;
+import br.com.marvel.controller.dto.characters.MarvelCharacter;
 
 import java.math.BigDecimal;
 

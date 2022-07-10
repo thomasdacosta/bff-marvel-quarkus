@@ -3,7 +3,7 @@ package br.com.marvel.controller;
 import br.com.marvel.adapters.outbound.entity.MarvelCharacterEntity;
 import br.com.marvel.adapters.outbound.entity.ThumbnailCharacterEntity;
 import br.com.marvel.adapters.outbound.entity.UrlCharacterEntity;
-import br.com.marvel.resource.dto.characters.MarvelCharacter;
+import br.com.marvel.controller.dto.characters.MarvelCharacter;
 import br.com.marvel.application.utils.Constants;
 import br.com.marvel.application.utils.JsonUtils;
 import br.com.marvel.utils.ResourceLoader;

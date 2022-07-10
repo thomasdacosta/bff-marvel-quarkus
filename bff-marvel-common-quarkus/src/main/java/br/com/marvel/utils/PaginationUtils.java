@@ -1,6 +1,6 @@
 package br.com.marvel.utils;
 
-import br.com.marvel.resource.dto.Pagination;
+import br.com.marvel.controller.dto.pagination.Pagination;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.ws.rs.core.Response;

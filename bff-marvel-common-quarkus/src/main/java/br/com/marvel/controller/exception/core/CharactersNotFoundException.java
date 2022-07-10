@@ -1,4 +1,4 @@
-package br.com.marvel.resource.exception;
+package br.com.marvel.controller.exception.core;
 
 import javax.ws.rs.WebApplicationException;
 

@@ -1,10 +1,10 @@
 package br.com.marvel.adapters.inbound.controller;
 
 import br.com.marvel.application.ports.in.MarvelCharacterServicePort;
-import br.com.marvel.resource.dto.Pagination;
-import br.com.marvel.resource.dto.characters.MarvelCharacter;
-import br.com.marvel.resource.dto.characters.ThumbnailCharacter;
-import br.com.marvel.resource.exception.CharactersNotFoundException;
+import br.com.marvel.controller.dto.pagination.Pagination;
+import br.com.marvel.controller.dto.characters.MarvelCharacter;
+import br.com.marvel.controller.dto.characters.ThumbnailCharacter;
+import br.com.marvel.controller.exception.core.CharactersNotFoundException;
 import br.com.marvel.utils.PaginationUtils;
 import org.eclipse.microprofile.faulttolerance.Retry;
 import org.eclipse.microprofile.faulttolerance.Timeout;

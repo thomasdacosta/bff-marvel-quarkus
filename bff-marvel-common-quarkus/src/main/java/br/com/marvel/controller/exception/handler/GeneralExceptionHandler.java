@@ -1,6 +1,6 @@
-package br.com.marvel.resource.exception.handler;
+package br.com.marvel.controller.exception.handler;
 
-import br.com.marvel.resource.exception.dto.BffMarvelError;
+import br.com.marvel.controller.exception.dto.BffMarvelError;
 import com.fasterxml.jackson.core.JacksonException;
 import org.apache.http.MethodNotSupportedException;
 import org.jboss.logging.Logger;

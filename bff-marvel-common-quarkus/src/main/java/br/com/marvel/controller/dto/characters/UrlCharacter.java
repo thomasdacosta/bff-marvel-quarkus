@@ -1,4 +1,4 @@
-package br.com.marvel.resource.dto.characters;
+package br.com.marvel.controller.dto.characters;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

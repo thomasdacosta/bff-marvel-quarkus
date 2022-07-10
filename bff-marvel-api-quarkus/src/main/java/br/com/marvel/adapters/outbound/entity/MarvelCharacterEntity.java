@@ -4,6 +4,11 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.Set;
 
@@ -22,24 +27,35 @@ public class MarvelCharacterEntity extends PanacheEntityBase {
 					@org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
 			}
 	)
+	@NotNull
 	private Long id;
 
+	@NotEmpty @NotBlank
+	@Size(max = 255)
 	@Column(name = "name")
 	private String name;
 
+	@NotEmpty @NotBlank
+	@Size(max = 255)
 	@Column(name = "description")
 	private String description;
 
+	@NotNull
 	@Column(name = "dateCreated")
 	private Date dateCreated;
 
+	@NotNull
 	@Column(name = "dateModified")
 	private Date dateModified;
 
+	@Valid
+	@NotNull
 	@OneToOne
 	@JoinColumn(name = "id_thumbnail_character")
 	private ThumbnailCharacterEntity thumbnail;
 
+	@Valid
+	@NotEmpty
 	@OneToMany
 	@JoinColumn(name = "id_marvel_character")
 	private Set<UrlCharacterEntity> urlCharacterEntities;

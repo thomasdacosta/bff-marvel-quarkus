@@ -8,7 +8,7 @@ import java.util.Objects;
 
 import javax.validation.Valid;
 
-import br.com.marvel.resource.dto.Pagination;
+import br.com.marvel.controller.dto.pagination.Pagination;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModelProperty;

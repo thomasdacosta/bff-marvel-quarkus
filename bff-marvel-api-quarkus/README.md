@@ -29,12 +29,15 @@ BFF (Backends For Frontends) desenvolvido em Quarkus que efeuta o acesso as APIÂ
 - JUnit 5 para [Testes UnitÃ¡rios e Integrados](https://junit.org/junit5/) 
 - Jacoco para [Cobertura de Teste](https://quarkus.io/guides/tests-with-coverage)
 - Log4j para [Logging](https://quarkus.io/guides/logging)
+- Quarkus Logging GELF para [Logging Centralizado](https://quarkus.io/guides/centralized-log-management)
 
 ## Links
 
 - Prometheus - [http://localhost:9090/](http://localhost:9090/)
 - Grafana - [http://localhost:3000/](http://localhost:3000/)
 - Jaeger - [http://localhost:16686/](http://localhost:16686/)
+- Graylog - [http://localhost:9000/](http://localhost:9000/)
+- ElasticSearch - [http://localhost:9200/](http://localhost:9200/)
 - Metrics do Quarkus - [http://localhost:8080/q/metrics](http://localhost:8080/q/metrics)
 - Liveness - [http://localhost:8080/q/health/live](http://localhost:8080/q/health/live)
 - Readiness - [http://localhost:8080/q/health/ready](http://localhost:8080/q/health/ready)

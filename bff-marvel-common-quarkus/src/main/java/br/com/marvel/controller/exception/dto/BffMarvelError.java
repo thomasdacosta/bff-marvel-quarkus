@@ -1,4 +1,4 @@
-package br.com.marvel.resource.exception.dto;
+package br.com.marvel.controller.exception.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;

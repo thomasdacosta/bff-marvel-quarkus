@@ -3,9 +3,9 @@ package br.com.marvel.adapters.inbound.mapper;
 import br.com.marvel.adapters.outbound.entity.MarvelCharacterEntity;
 import br.com.marvel.adapters.outbound.entity.ThumbnailCharacterEntity;
 import br.com.marvel.adapters.outbound.entity.UrlCharacterEntity;
-import br.com.marvel.resource.dto.characters.MarvelCharacter;
-import br.com.marvel.resource.dto.characters.ThumbnailCharacter;
-import br.com.marvel.resource.dto.characters.UrlCharacter;
+import br.com.marvel.controller.dto.characters.MarvelCharacter;
+import br.com.marvel.controller.dto.characters.ThumbnailCharacter;
+import br.com.marvel.controller.dto.characters.UrlCharacter;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
