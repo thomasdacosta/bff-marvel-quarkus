@@ -10,6 +10,8 @@ BFF (Backends For Frontends) desenvolvido em Quarkus que efeuta o acesso as API�
 - Jaeger
 - Prometheus
 - Grafana
+- Graylog
+- ElasticSearch
 
 ## Componentes da Aplicação
 
