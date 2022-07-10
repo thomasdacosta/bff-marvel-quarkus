@@ -4,14 +4,17 @@ import br.com.marvel.repository.entity.MarvelCharacterEntity;
 import br.com.marvel.repository.entity.ThumbnailCharacterEntity;
 import br.com.marvel.repository.entity.UrlCharacterEntity;
 import br.com.marvel.resource.dto.characters.MarvelCharacter;
+import br.com.marvel.utils.Constants;
 import br.com.marvel.utils.JsonUtils;
 import br.com.marvel.utils.ResourceLoader;
+import br.com.marvel.utils.WireMockServers;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +28,18 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @TestMethodOrder(OrderAnnotation.class)
 public class MarvelCharacterResourceTest {
 
-    private static final String CHARACTER_1_JSON = "json/character1.json";
-    private static final String CHARACTER_2_JSON = "json/character2.json";
-    private static final String CHARACTER_3_JSON = "json/character3.json";
+    @Inject
+    WireMockServers wireMockServers;
+
+    @BeforeAll
+    public static void beforeAll() {
+        WireMockServers.start();
+    }
+
+    @AfterAll
+    public static void afterAll() {
+        WireMockServers.stop();
+    }
 
     @BeforeEach
     @Transactional
@@ -41,15 +53,15 @@ public class MarvelCharacterResourceTest {
     @Order(1)
     @DisplayName("1 - Criando Personagem")
     public void testCreateCharacter() {
-        createCharacter(CHARACTER_2_JSON);
+        createCharacter(Constants.CHARACTER_2_JSON);
     }
 
     @Test
     @Order(2)
     @DisplayName("2 - Atualizando Personagem")
     public void testUpdateCharacter() {
-        MarvelCharacter marvelCharacter = createCharacter(CHARACTER_3_JSON);
-        marvelCharacter.setName("Spider Man");
+        MarvelCharacter marvelCharacter = createCharacter(Constants.CHARACTER_3_JSON);
+        marvelCharacter.setName(Constants.CHARACTER_UPDATE_NAME);
 
         Response responseUpdate = given()
                 .contentType(ContentType.JSON)
@@ -60,7 +72,7 @@ public class MarvelCharacterResourceTest {
                 .extract().response();
 
         assertEquals(Status.OK.getStatusCode(), responseUpdate.statusCode());
-        assertEquals("Spider Man", responseUpdate.jsonPath().getString("name"));
+        assertEquals(Constants.CHARACTER_UPDATE_NAME, responseUpdate.jsonPath().getString("name"));
         assertEquals(3, responseUpdate.jsonPath().getList("urls").size());
     }
 
@@ -69,7 +81,7 @@ public class MarvelCharacterResourceTest {
     @DisplayName("3 - Atualizando Personagem Não Existe")
     public void testUpdateCharacterNotFound() {
         MarvelCharacter marvelCharacter = (MarvelCharacter) JsonUtils
-                .createObject(ResourceLoader.loadFile(CHARACTER_1_JSON), MarvelCharacter.class);
+                .createObject(ResourceLoader.loadFile(Constants.CHARACTER_1_JSON), MarvelCharacter.class);
 
         Response responseUpdate = given()
                 .contentType(ContentType.JSON)
@@ -86,7 +98,7 @@ public class MarvelCharacterResourceTest {
     @Order(4)
     @DisplayName("4 - Excluindo Personagem")
     public void testDeleteCharacter() {
-        MarvelCharacter marvelCharacter = createCharacter(CHARACTER_1_JSON);
+        MarvelCharacter marvelCharacter = createCharacter(Constants.CHARACTER_1_JSON);
 
         Response responseUpdate = given()
                 .contentType(ContentType.JSON)
@@ -126,9 +138,9 @@ public class MarvelCharacterResourceTest {
     @Test
     @Order(6)
     @SuppressWarnings("rawtypes")
-    @DisplayName("6 - Pesquisando Personagem Por Nome")
-    public void testFindByName() {
-        MarvelCharacter marvelCharacter = createCharacter(CHARACTER_1_JSON);
+    @DisplayName("6 - Pesquisando Personagem Por Nome (local)")
+    public void testFindByNameLocal() {
+        MarvelCharacter marvelCharacter = createCharacter(Constants.CHARACTER_1_JSON);
 
         Response responseSearch = given()
                 .contentType(ContentType.JSON)
@@ -142,23 +154,23 @@ public class MarvelCharacterResourceTest {
         List<String> name = responseSearch.jsonPath().getList("name");
         List<ArrayList> urls = responseSearch.jsonPath().getList("urls");
 
-        assertEquals("Thor", name.get(0));
+        assertEquals(Constants.CHARACTER_NAME, name.get(0).toLowerCase());
         assertEquals(3, urls.get(0).size());
     }
 
     @Test
     @Order(7)
     @SuppressWarnings("rawtypes")
-    @DisplayName("7 - Pesquisando Personagem Por Inicio do Nome")
-    public void testFindByNameStartsWith() {
-        createCharacter(CHARACTER_1_JSON);
-        createCharacter(CHARACTER_2_JSON);
-        createCharacter(CHARACTER_3_JSON);
+    @DisplayName("7 - Pesquisando Personagem Por Inicio do Nome (local)")
+    public void testFindByNameStartsWithLocal() {
+        createCharacter(Constants.CHARACTER_1_JSON);
+        createCharacter(Constants.CHARACTER_2_JSON);
+        createCharacter(Constants.CHARACTER_3_JSON);
 
         Response responseSearch = given()
                 .contentType(ContentType.JSON)
                 .when()
-                .param("nameStartsWith", "Thor")
+                .param("nameStartsWith", Constants.CHARACTER_NAME)
                 .get("/characters/local")
                 .then()
                 .extract().response();
@@ -171,6 +183,80 @@ public class MarvelCharacterResourceTest {
         assertEquals(1, name.stream().filter(p -> p.equals("Thor (Goddess of Thunder)")).count());
         assertEquals(1, name.stream().filter(p -> p.equals("Thor (MAA)")).count());
         assertEquals(3, urls.size());
+    }
+
+    @Test
+    @Order(8)
+    @DisplayName("8 - Pesquisando Personagem Por Nome (api)")
+    public void testFindByNameApi() {
+        wireMockServers.serverCharacterName(Constants.CHARACTER_4_JSON);
+
+        Response responseSearch = given()
+                .contentType(ContentType.JSON)
+                .when()
+                .param("name", Constants.CHARACTER_NAME)
+                .get("/characters/api")
+                .then()
+                .extract().response();
+
+        assertEquals(Status.OK.getStatusCode(), responseSearch.statusCode());
+        List<String> name = responseSearch.jsonPath().getList("name");
+        List<ArrayList> urls = responseSearch.jsonPath().getList("urls");
+
+        assertEquals("Thor", name.get(0));
+        assertEquals(3, urls.get(0).size());
+    }
+
+    @Test
+    @Order(9)
+    @SuppressWarnings("rawtypes")
+    @DisplayName("9 - Pesquisando Personagem Por Inicio do Nome (api)")
+    public void testFindByNameStartsWithApi() {
+        wireMockServers.serverCharacterNameStartsWith(Constants.CHARACTER_5_JSON);
+
+        Response responseSearch = given()
+                .contentType(ContentType.JSON)
+                .when()
+                .param("nameStartsWith", Constants.CHARACTER_NAME)
+                .get("/characters/api")
+                .then()
+                .extract().response();
+
+        assertEquals(Status.OK.getStatusCode(), responseSearch.statusCode());
+        List<String> name = responseSearch.jsonPath().getList("name");
+        List<ArrayList> urls = responseSearch.jsonPath().getList("urls");
+
+        assertEquals(1, name.stream().filter(p -> p.equals("Thor")).count());
+        assertEquals(1, name.stream().filter(p -> p.equals("Thor (Goddess of Thunder)")).count());
+        assertEquals(1, name.stream().filter(p -> p.equals("Thor (MAA)")).count());
+        assertEquals(1, name.stream().filter(p -> p.equals("Thor (Marvel Heroes)")).count());
+        assertEquals(1, name.stream().filter(p -> p.equals("Thor (Marvel War of Heroes)")).count());
+        assertEquals(1, name.stream().filter(p -> p.equals("Thor (Marvel: Avengers Alliance)")).count());
+        assertEquals(1, name.stream().filter(p -> p.equals("Thor (Ultimate)")).count());
+        assertEquals(1, name.stream().filter(p -> p.equals("Thor Girl")).count());
+        assertEquals(8, urls.size());
+    }
+
+    @Test
+    @Order(10)
+    @SuppressWarnings("rawtypes")
+    @DisplayName("10 - Pesquisando Todos os Personagem (local)")
+    public void testFindAllLocal() {
+        createCharacter(Constants.CHARACTER_1_JSON);
+
+        Response responseSearch = given()
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/characters/local")
+                .then()
+                .extract().response();
+
+        assertEquals(Status.OK.getStatusCode(), responseSearch.statusCode());
+        List<String> name = responseSearch.jsonPath().getList("name");
+        List<ArrayList> urls = responseSearch.jsonPath().getList("urls");
+
+        assertEquals(Constants.CHARACTER_NAME, name.get(0).toLowerCase());
+        assertEquals(3, urls.get(0).size());
     }
 
     private MarvelCharacter createCharacter(String file) {

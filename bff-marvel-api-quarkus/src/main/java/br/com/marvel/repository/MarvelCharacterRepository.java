@@ -8,12 +8,14 @@ import br.com.marvel.resource.exception.CharactersNotFoundException;
 import br.com.marvel.utils.MarvelCharacterConverter;
 import br.com.marvel.utils.MarvelCharacterEntityConverter;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
+import org.eclipse.microprofile.opentracing.Traced;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Traced
 @ApplicationScoped
 public class MarvelCharacterRepository {
 

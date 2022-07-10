@@ -9,6 +9,7 @@ import br.com.marvel.resource.dto.characters.ThumbnailCharacter;
 import br.com.marvel.resource.dto.characters.UrlCharacter;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.opentracing.Traced;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -17,6 +18,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Traced
 @ApplicationScoped
 public class MarvelCharacterService {
 
