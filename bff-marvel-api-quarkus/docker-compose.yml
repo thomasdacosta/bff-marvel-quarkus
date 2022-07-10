@@ -14,7 +14,7 @@ services:
     image: jaegertracing/all-in-one:1.36
     environment:
       METRICS_STORAGE_TYPE: prometheus
-      PROMETHEUS_SERVER_URL: http://localhost:9090
+      PROMETHEUS_SERVER_URL: http://host.docker.internal:9090
     ports:
       - "5775:5775/udp"
       - "6831:6831/udp"
@@ -27,6 +27,9 @@ services:
   prometheus:
     container_name: prometheus
     image: "prom/prometheus"
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prometheus-data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
@@ -43,3 +46,6 @@ services:
     depends_on:
       - prometheus
     restart: always
+
+volumes:
+  prometheus-data:

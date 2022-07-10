@@ -13,11 +13,19 @@ BFF (Backends For Frontends) desenvolvido em Quarkus que efeuta o acesso as API�
 - OpenTracing JDBC [Tracing de Banco de Dados no Jaeger](https://quarkus.io/guides/opentracing)
 - SmallRye Fault-Tolerance para [Retry e Circuit Breaker](https://quarkus.io/guides/smallrye-fault-tolerance)
 - SmallRye OpenApi para [Open API e Swagger](https://quarkus.io/guides/openapi-swaggerui)
+- Micrometer para [Métricas](https://quarkus.io/guides/micrometer)
 - REST Assured para [Testes Unitários e Integrados da API](https://quarkus.io/guides/getting-started-testing)
 - Wiremock para [Simular servidores HTTP em Testes](https://wiremock.org/)
 - JUnit 5 para [Testes Unitários e Integrados](https://junit.org/junit5/) 
 - Jacoco para [Cobertura de Teste](https://quarkus.io/guides/tests-with-coverage)
 - Log4j para [Logging](https://quarkus.io/guides/logging)
+
+## Links
+
+- Prometheus - [http://localhost:9090/](http://localhost:9090/)
+- Grafana - [http://localhost:3000/](http://localhost:3000/)
+- Jaeger - [http://localhost:16686/](http://localhost:16686/)
+- Metrics do Quarkus - [http://localhost:8080/q/metrics](http://localhost:8080/q/metrics)
 
 ---
 Thomás da Costa - [https://thomasdacosta.com.br](https://thomasdacosta.com.br)
