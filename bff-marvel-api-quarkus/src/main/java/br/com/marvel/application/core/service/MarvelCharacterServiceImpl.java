@@ -3,17 +3,15 @@ package br.com.marvel.application.core.service;
 import br.com.marvel.application.ports.in.MarvelCharacterServicePort;
 import br.com.marvel.application.ports.out.MarvelApiClientPort;
 import br.com.marvel.application.ports.out.MarvelCharacterRepositoryPort;
-import br.com.marvel.client.MarvelApiClient;
 import br.com.marvel.client.dto.InlineResponse200;
+import br.com.marvel.config.ApplicationConfig;
 import br.com.marvel.resource.dto.Pagination;
 import br.com.marvel.resource.dto.characters.MarvelCharacter;
 import br.com.marvel.resource.dto.characters.ThumbnailCharacter;
 import br.com.marvel.resource.dto.characters.UrlCharacter;
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.metrics.annotation.Counted;
 import org.eclipse.microprofile.opentracing.Traced;
-import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -26,14 +24,8 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class MarvelCharacterServiceImpl implements MarvelCharacterServicePort {
 
-    @ConfigProperty(name = "quarkus.rest-client.marvel-api.ts")
-    String ts;
-
-    @ConfigProperty(name = "quarkus.rest-client.marvel-api.apiKey")
-    String apiKey;
-
-    @ConfigProperty(name = "quarkus.rest-client.marvel-api.hash")
-    String hash;
+    @Inject
+    ApplicationConfig applicationConfig;
 
     @Inject
     MarvelApiClientPort marvelApiClient;
@@ -83,8 +75,8 @@ public class MarvelCharacterServiceImpl implements MarvelCharacterServicePort {
 
     @Override
     public Pagination findCharactersApi(String name, String nameStartsWith, BigDecimal offset, BigDecimal limit) {
-        InlineResponse200 listCharacters = marvelApiClient.listCharacters(ts, apiKey, hash, name, nameStartsWith, null, null, null,
-                null, null, null, limit, offset);
+        InlineResponse200 listCharacters = marvelApiClient.listCharacters(applicationConfig.getTs(), applicationConfig.getApiKey(), applicationConfig.getHash(),
+                name, nameStartsWith, null, null, null, null, null, null, limit, offset);
 
         Pagination pagination = listCharacters.getData();
 
