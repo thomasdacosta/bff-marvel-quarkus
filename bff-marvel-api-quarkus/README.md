@@ -15,6 +15,7 @@ BFF (Backends For Frontends) desenvolvido em Quarkus que efeuta o acesso as API�
 - REST Assured para [Testes Unitários e Integrados da API](https://quarkus.io/guides/getting-started-testing)
 - Wiremock para [Simular servidores HTTP em Testes](https://wiremock.org/)
 - JUnit 5 para [Testes Unitários e Integrados](https://junit.org/junit5/) 
+- Jacoco para [Cobertura de Teste](https://quarkus.io/guides/tests-with-coverage)
 - CDI para [Injeção de Dependência](https://quarkus.io/guides/cdi)
 - Log4j para [Logging](https://quarkus.io/guides/logging)
 
