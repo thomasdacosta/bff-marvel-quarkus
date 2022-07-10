@@ -1,4 +1,4 @@
-package br.com.marvel.repository.entity;
+package br.com.marvel.adapters.outbound.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import org.hibernate.annotations.GenericGenerator;

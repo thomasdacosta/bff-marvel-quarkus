@@ -1,5 +1,6 @@
 package br.com.marvel.utils;
 
+import br.com.marvel.application.utils.Constants;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import org.eclipse.microprofile.config.inject.ConfigProperty;

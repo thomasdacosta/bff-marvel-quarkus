@@ -1,4 +1,4 @@
-package br.com.marvel.resource;
+package br.com.marvel.controller;
 
 import br.com.marvel.utils.ResourceLoader;
 import org.jboss.logging.Logger;

@@ -1,4 +1,4 @@
-package br.com.marvel.utils;
+package br.com.marvel.application.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

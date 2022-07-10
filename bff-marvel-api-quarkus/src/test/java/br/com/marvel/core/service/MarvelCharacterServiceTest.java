@@ -1,6 +1,6 @@
-package br.com.marvel.resource;
+package br.com.marvel.core.service;
 
-import br.com.marvel.utils.Constants;
+import br.com.marvel.application.utils.Constants;
 import br.com.marvel.utils.WireMockServers;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.AfterAll;

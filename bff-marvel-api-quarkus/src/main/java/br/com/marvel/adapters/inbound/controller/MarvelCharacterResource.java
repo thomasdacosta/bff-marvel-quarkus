@@ -1,13 +1,14 @@
-package br.com.marvel.resource;
+package br.com.marvel.adapters.inbound.controller;
 
+import br.com.marvel.application.ports.in.MarvelCharacterServicePort;
 import br.com.marvel.resource.dto.Pagination;
 import br.com.marvel.resource.dto.characters.MarvelCharacter;
 import br.com.marvel.resource.dto.characters.ThumbnailCharacter;
 import br.com.marvel.resource.exception.CharactersNotFoundException;
-import br.com.marvel.service.MarvelCharacterService;
 import br.com.marvel.utils.PaginationUtils;
 import org.eclipse.microprofile.faulttolerance.Retry;
 import org.eclipse.microprofile.faulttolerance.Timeout;
+import org.eclipse.microprofile.metrics.annotation.Counted;
 import org.jboss.logging.Logger;
 
 import javax.inject.Inject;
@@ -20,6 +21,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
 
+@Counted
 @Timeout(value = 5000)
 @Path("/")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -30,7 +32,7 @@ public class MarvelCharacterResource {
     Logger LOGGER;
 
     @Inject
-    MarvelCharacterService marvelCharacterService;
+    MarvelCharacterServicePort marvelCharacterService;
 
     @GET
     @Path("/characters/local")

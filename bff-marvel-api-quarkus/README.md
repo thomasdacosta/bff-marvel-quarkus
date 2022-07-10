@@ -22,6 +22,7 @@ BFF (Backends For Frontends) desenvolvido em Quarkus que efeuta o acesso as API�
 - OpenTracing JDBC [Tracing de Banco de Dados no Jaeger](https://quarkus.io/guides/opentracing)
 - SmallRye Fault-Tolerance para [Retry e Circuit Breaker](https://quarkus.io/guides/smallrye-fault-tolerance)
 - SmallRye OpenApi para [Open API e Swagger](https://quarkus.io/guides/openapi-swaggerui)
+- SmallRye Health para [Health da Aplicação](https://quarkus.io/guides/smallrye-health)
 - Micrometer para [Métricas](https://quarkus.io/guides/micrometer)
 - REST Assured para [Testes Unitários e Integrados da API](https://quarkus.io/guides/getting-started-testing)
 - Wiremock para [Simular servidores HTTP em Testes](https://wiremock.org/)
@@ -35,6 +36,11 @@ BFF (Backends For Frontends) desenvolvido em Quarkus que efeuta o acesso as API�
 - Grafana - [http://localhost:3000/](http://localhost:3000/)
 - Jaeger - [http://localhost:16686/](http://localhost:16686/)
 - Metrics do Quarkus - [http://localhost:8080/q/metrics](http://localhost:8080/q/metrics)
+- Liveness - [http://localhost:8080/q/health/live](http://localhost:8080/q/health/live)
+- Readiness - [http://localhost:8080/q/health/ready](http://localhost:8080/q/health/ready)
+- Started - [http://localhost:8080/q/health/started](http://localhost:8080/q/health/started)
+- Health - [http://localhost:8080/q/health](http://localhost:8080/q/health)
+- Health UI - [http://localhost:8080/q/health-ui/](http://localhost:8080/q/health-ui/)
 
 ---
 Thomás da Costa - [https://thomasdacosta.com.br](https://thomasdacosta.com.br)

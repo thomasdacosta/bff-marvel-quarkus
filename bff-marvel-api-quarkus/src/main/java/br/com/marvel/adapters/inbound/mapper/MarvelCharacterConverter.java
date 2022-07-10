@@ -1,8 +1,8 @@
-package br.com.marvel.utils;
+package br.com.marvel.adapters.inbound.mapper;
 
-import br.com.marvel.repository.entity.MarvelCharacterEntity;
-import br.com.marvel.repository.entity.ThumbnailCharacterEntity;
-import br.com.marvel.repository.entity.UrlCharacterEntity;
+import br.com.marvel.adapters.outbound.entity.MarvelCharacterEntity;
+import br.com.marvel.adapters.outbound.entity.ThumbnailCharacterEntity;
+import br.com.marvel.adapters.outbound.entity.UrlCharacterEntity;
 import br.com.marvel.resource.dto.characters.MarvelCharacter;
 import br.com.marvel.resource.dto.characters.ThumbnailCharacter;
 import br.com.marvel.resource.dto.characters.UrlCharacter;

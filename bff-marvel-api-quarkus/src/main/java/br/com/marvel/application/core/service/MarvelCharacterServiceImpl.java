@@ -1,14 +1,17 @@
-package br.com.marvel.service;
+package br.com.marvel.application.core.service;
 
+import br.com.marvel.application.ports.in.MarvelCharacterServicePort;
+import br.com.marvel.application.ports.out.MarvelApiClientPort;
+import br.com.marvel.application.ports.out.MarvelCharacterRepositoryPort;
 import br.com.marvel.client.MarvelApiClient;
 import br.com.marvel.client.dto.InlineResponse200;
-import br.com.marvel.repository.MarvelCharacterRepository;
 import br.com.marvel.resource.dto.Pagination;
 import br.com.marvel.resource.dto.characters.MarvelCharacter;
 import br.com.marvel.resource.dto.characters.ThumbnailCharacter;
 import br.com.marvel.resource.dto.characters.UrlCharacter;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.metrics.annotation.Counted;
 import org.eclipse.microprofile.opentracing.Traced;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
@@ -18,9 +21,10 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Counted
 @Traced
 @ApplicationScoped
-public class MarvelCharacterService {
+public class MarvelCharacterServiceImpl implements MarvelCharacterServicePort {
 
     @ConfigProperty(name = "quarkus.rest-client.marvel-api.ts")
     String ts;
@@ -32,24 +36,27 @@ public class MarvelCharacterService {
     String hash;
 
     @Inject
-    @RestClient
-    MarvelApiClient marvelApiClient;
+    MarvelApiClientPort marvelApiClient;
 
     @Inject
-    MarvelCharacterRepository marvelCharacterRepository;
+    MarvelCharacterRepositoryPort marvelCharacterRepository;
 
+    @Override
     public MarvelCharacter save(MarvelCharacter marvelCharacter) {
         return marvelCharacterRepository.save(marvelCharacter);
     }
 
+    @Override
     public MarvelCharacter update(MarvelCharacter marvelCharacter) {
         return marvelCharacterRepository.update(marvelCharacter);
     }
 
+    @Override
     public void delete(Long id) {
         marvelCharacterRepository.delete(id);
     }
 
+    @Override
     public Pagination findCharactersLocal(String name, String nameStartsWith, BigDecimal offset, BigDecimal limit) {
         List<MarvelCharacter> marvelCharacters;
 
@@ -74,6 +81,7 @@ public class MarvelCharacterService {
         }
     }
 
+    @Override
     public Pagination findCharactersApi(String name, String nameStartsWith, BigDecimal offset, BigDecimal limit) {
         InlineResponse200 listCharacters = marvelApiClient.listCharacters(ts, apiKey, hash, name, nameStartsWith, null, null, null,
                 null, null, null, limit, offset);
