@@ -11,7 +11,10 @@ services:
       - "3306:3306"
   jaeger:
     container_name: jaeger
-    image: jaegertracing/all-in-one:1.17
+    image: jaegertracing/all-in-one:1.36
+    environment:
+      METRICS_STORAGE_TYPE: prometheus
+      PROMETHEUS_SERVER_URL: http://localhost:9090
     ports:
       - "5775:5775/udp"
       - "6831:6831/udp"
@@ -21,3 +24,22 @@ services:
       - "14268:14268"
       - "14250:14250"
       - "9411:9411"
+  prometheus:
+    container_name: prometheus
+    image: "prom/prometheus"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - 9090:9090
+    restart: always
+  grafana:
+    container_name: grafana
+    image: "grafana/grafana"
+    ports:
+      - 3000:3000
+    depends_on:
+      - prometheus
+    restart: always

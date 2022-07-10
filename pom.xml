@@ -27,6 +27,7 @@
 	<modules>
 		<module>bff-marvel-common-quarkus</module>
 		<module>bff-marvel-api-quarkus</module>
+		<module>bff-marvel-api-mock</module>
 	</modules>
 
 </project>

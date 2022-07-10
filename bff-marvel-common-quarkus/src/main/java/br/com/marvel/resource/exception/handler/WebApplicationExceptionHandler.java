@@ -14,11 +14,11 @@ import javax.ws.rs.ext.Provider;
 public class WebApplicationExceptionHandler implements ExceptionMapper<WebApplicationException> {
 
     @Inject
-    Logger logger;
+    Logger LOGGER;
 
     @Override
     public Response toResponse(WebApplicationException ex) {
-        logger.error(ex.getMessage(), ex);
+        LOGGER.error(ex.getMessage(), ex);
 
         if (ex instanceof CharactersNotFoundException) {
             return Response.status(Response.Status.NOT_FOUND).entity(BffMarvelError.notFound(ex)).build();

@@ -1,6 +1,8 @@
 package br.com.marvel.client;
 
 import br.com.marvel.client.dto.InlineResponse200;
+import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
+import org.eclipse.microprofile.faulttolerance.Retry;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import javax.ws.rs.GET;
@@ -9,11 +11,13 @@ import javax.ws.rs.QueryParam;
 import java.math.BigDecimal;
 
 @Path("/")
+@Retry(maxRetries = 4, delay = 1000)
 @RegisterRestClient(configKey = "marvel-api")
 public interface MarvelApiClient {
 
     @GET
     @Path("/characters")
+    @CircuitBreaker(successThreshold = 5)
     InlineResponse200 listCharacters(@QueryParam("ts") String ts,
                                      @QueryParam("apikey") String apikey,
                                      @QueryParam("hash") String hash,

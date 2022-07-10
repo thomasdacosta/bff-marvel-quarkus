@@ -16,11 +16,11 @@ import javax.ws.rs.ext.Provider;
 public class GeneralExceptionHandler implements ExceptionMapper<Exception> {
 
     @Inject
-    Logger logger;
+    Logger LOGGER;
 
     @Override
     public Response toResponse(Exception ex) {
-        logger.error(ex.getMessage(), ex);
+        LOGGER.error(ex.getMessage(), ex);
 
         if (ex instanceof BadRequestException) {
             return Response.status(Response.Status.BAD_REQUEST).entity(BffMarvelError.badRequest(ex)).build();
