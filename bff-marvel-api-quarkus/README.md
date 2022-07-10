@@ -6,7 +6,8 @@ BFF (Backends For Frontends) desenvolvido em Quarkus que efeuta o acesso as API�
 
 - RESTEasy, RESTEasy JSON-B e RESTEasy Jackson para [Endpoint Rest](https://quarkus.io/guides/rest-json)
 - RESTEasy Client para [API Client](https://quarkus.io/guides/rest-client)
-- Panache com Hibernate para [Camada de Banco de Dados](https://quarkus.io/guides/hibernate-orm-panache)
+- CDI para [Injeção de Dependência](https://quarkus.io/guides/cdi)
+- Hibernate com Panache para [Camada de Banco de Dados](https://quarkus.io/guides/hibernate-orm-panache)
 - Hibernate-Validator para [Validação de Dados](https://quarkus.io/guides/validation)
 - Smallrye OpenTracing para [Tracing de Aplicação com Jaeger](https://quarkus.io/guides/opentracing)
 - OpenTracing JDBC [Tracing de Banco de Dados no Jaeger](https://quarkus.io/guides/opentracing)
@@ -16,7 +17,6 @@ BFF (Backends For Frontends) desenvolvido em Quarkus que efeuta o acesso as API�
 - Wiremock para [Simular servidores HTTP em Testes](https://wiremock.org/)
 - JUnit 5 para [Testes Unitários e Integrados](https://junit.org/junit5/) 
 - Jacoco para [Cobertura de Teste](https://quarkus.io/guides/tests-with-coverage)
-- CDI para [Injeção de Dependência](https://quarkus.io/guides/cdi)
 - Log4j para [Logging](https://quarkus.io/guides/logging)
 
 ---
