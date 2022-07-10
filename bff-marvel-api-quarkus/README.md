@@ -2,6 +2,15 @@
 
 BFF (Backends For Frontends) desenvolvido em Quarkus que efeuta o acesso as API´s Oficiais da Marvel e busca o personagem, HQ´s e eventos de acordo com o nome pesquisado.
 
+## Tecnologias
+
+- Java 17
+- Quarkus
+- MySQL
+- Jaeger
+- Prometheus
+- Grafana
+
 ## Componentes da Aplicação
 
 - RESTEasy, RESTEasy JSON-B e RESTEasy Jackson para [Endpoint Rest](https://quarkus.io/guides/rest-json)
