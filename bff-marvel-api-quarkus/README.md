@@ -1,5 +1,7 @@
 # BFF Marvel API - 1.0.0
 
+[![codecov](https://codecov.io/gh/thomasdacosta/bff-marvel-quarkus/branch/main/graph/badge.svg?token=JP3hk79XBZ)](https://codecov.io/gh/thomasdacosta/bff-marvel-quarkus)
+
 BFF (Backends For Frontends) desenvolvido em Quarkus que efeuta o acesso as API´s Oficiais da Marvel e busca o personagem, HQ´s e eventos de acordo com o nome pesquisado.
 
 ## Tecnologias
