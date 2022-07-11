@@ -19,9 +19,10 @@ jobs:
       # Checkout the code as the first step.
       - checkout
       # Use mvn clean and package as the standard maven build phase
-      - run:
+      - run:  
+          working_directory: ./bff-marvel-quarkus
           name: Build
-          command: mvn clean install -DskipTests
+          command: mvn clean install
       # Then run your tests!
       - run:
           name: Test
