@@ -2,6 +2,8 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+orbs:
+  codecov: codecov/codecov@3.2.2  
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
@@ -26,11 +28,14 @@ jobs:
       - run:
           name: Test
           command: mvn test
-
+      - run:    
+          command: echo 'export CODECOV_TOKEN="c0a79db8-a553-4d2b-b57c-cb4d29e746de"' >> $BASH_ENV
+      - codecov/upload:
+          validate: true
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
+  bff-marvel-quarkus-workflow: # This is the name of the workflow, feel free to change it to better match your workflow.
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build-and-test
