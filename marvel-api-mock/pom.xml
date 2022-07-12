@@ -35,7 +35,7 @@
     <dependencies>
         <dependency>
             <groupId>br.com.marvel</groupId>
-            <artifactId>bff-marvel-common-quarkus</artifactId>
+            <artifactId>bff-marvel-common</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
