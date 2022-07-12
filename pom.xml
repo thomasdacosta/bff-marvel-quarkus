@@ -6,10 +6,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com.thomasdacosta</groupId>
 
-	<artifactId>bff-marvel</artifactId>
+	<artifactId>bff-marvel-quarkus</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 
-	<name>[BFF Marvel - Quarkus] - Main - bff-marvel</name>
+	<name>[BFF Marvel - Quarkus] - Main - bff-marvel-quarkus</name>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -25,9 +25,9 @@
 	</properties>
 
 	<modules>
-		<module>bff-marvel-common-quarkus</module>
-		<module>bff-marvel-api-quarkus</module>
-		<module>bff-marvel-api-mock</module>
+		<module>bff-marvel-common</module>
+		<module>bff-marvel-api-character</module>
+		<module>marvel-api-mock</module>
 	</modules>
 
 </project>
