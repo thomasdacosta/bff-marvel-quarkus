@@ -7,6 +7,7 @@ import br.com.marvel.adapters.outbound.entity.UrlCharacterEntity;
 import br.com.marvel.adapters.outbound.mapper.CharacterEntityConverter;
 import br.com.marvel.application.ports.in.CharacterServicePort;
 import br.com.marvel.application.ports.out.CharacterApiClientPort;
+import br.com.marvel.application.utils.JsonUtils;
 import br.com.marvel.client.dto.InlineResponse200;
 import br.com.marvel.config.ApplicationConfig;
 import br.com.marvel.controller.dto.characters.Character;
@@ -18,6 +19,9 @@ import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.microprofile.metrics.annotation.Counted;
 import org.eclipse.microprofile.opentracing.Traced;
+import software.amazon.awssdk.services.sns.SnsClient;
+import software.amazon.awssdk.services.sns.model.MessageAttributeValue;
+import software.amazon.awssdk.services.sns.model.PublishResponse;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -36,6 +40,9 @@ public class CharacterServiceImpl implements CharacterServicePort {
 
     @Inject
     CharacterApiClientPort characterApiClientPort;
+
+    @Inject
+    SnsClient sns;
 
     @Override
     @Transactional
@@ -170,6 +177,13 @@ public class CharacterServiceImpl implements CharacterServicePort {
                 thumbnailCharacter.setExtension(c.getThumbnail().getExtension());
 
                 character.setThumbnail(thumbnailCharacter);
+
+                Map<String, MessageAttributeValue> headers = new HashMap<>();
+                headers.put("character", MessageAttributeValue.builder().dataType("String").stringValue(JsonUtils.createJson(character)).build());
+
+                PublishResponse response = sns.publish(p -> p.topicArn("arn:aws:sns:us-east-1:000000000000:marvelThumbnailImageNotification")
+                        .messageAttributes(headers)
+                        .message(JsonUtils.createJson(thumbnailCharacter)));
 
                 List<UrlCharacter> urlCharacters = c.getUrls().stream().map(u -> {
                     UrlCharacter urlCharacter = new UrlCharacter();
