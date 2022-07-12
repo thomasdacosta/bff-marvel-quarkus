@@ -1,0 +1,468 @@
+{
+	"info": {
+		"_postman_id": "866122e4-8c77-40fb-a3b9-2a9b6a0ceb90",
+		"name": "BFF - Quarkus",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3374459"
+	},
+	"item": [
+		{
+			"name": "GET - LOCAL - Find Characters - nameStartsWith",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "offset",
+						"value": "0",
+						"type": "default"
+					},
+					{
+						"key": "limit",
+						"value": "10",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{url_bff}}/characters/local?nameStartsWith=thor",
+					"host": [
+						"{{url_bff}}"
+					],
+					"path": [
+						"characters",
+						"local"
+					],
+					"query": [
+						{
+							"key": "nameStartsWith",
+							"value": "thor"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - LOCAL - FInd Characters - name",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "offset",
+						"value": "0",
+						"type": "default"
+					},
+					{
+						"key": "limit",
+						"value": "10",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{url_bff}}/characters/local?name=thor",
+					"host": [
+						"{{url_bff}}"
+					],
+					"path": [
+						"characters",
+						"local"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "thor"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - API - Find Characters - nameStartsWith",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "offset",
+						"value": "0",
+						"type": "default"
+					},
+					{
+						"key": "limit",
+						"value": "10",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{url_bff}}/characters/api?nameStartsWith=thor",
+					"host": [
+						"{{url_bff}}"
+					],
+					"path": [
+						"characters",
+						"api"
+					],
+					"query": [
+						{
+							"key": "nameStartsWith",
+							"value": "thor"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - API - FInd Characters - name",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "offset",
+						"value": "0",
+						"type": "default"
+					},
+					{
+						"key": "limit",
+						"value": "10",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{url_bff}}/characters/api?name=thor",
+					"host": [
+						"{{url_bff}}"
+					],
+					"path": [
+						"characters",
+						"api"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "thor"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Update Character",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1024,\r\n    \"name\": \"Thor (Marvel War of Heroes)xxxx\",\r\n    \"description\": \"Thor (Marvel War of Heroes)xxxxx\",\r\n    \"modified\": \"2022-07-08T19:15:26-0300\",\r\n    \"thumbnail\": {\r\n        \"id\": 1020,\r\n        \"url\": \"http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350\",\r\n        \"extension\": \"jpg\"\r\n    },\r\n    \"urls\": [\r\n        {\r\n            \"detail\": \"detail\",\r\n            \"url\": \"http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        },\r\n        {\r\n            \"detail\": \"wiki\",\r\n            \"url\": \"http://marvel.com/universe/Thor_(Thor_Odinson)?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        },\r\n        {\r\n            \"detail\": \"comiclink\",\r\n            \"url\": \"http://marvel.com/comics/characters/1009664/thor?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "{{url_bff}}/characters",
+					"host": [
+						"{{url_bff}}"
+					],
+					"path": [
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Delete Character",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 0,\r\n    \"name\": \"Thor\",\r\n    \"description\": \"As the Norse God of thunder and lightning, Thor wields one of the greatest weapons ever made, the enchanted hammer Mjolnir. While others have described Thor as an over-muscled, oafish imbecile, he's quite smart and compassionate.\",\r\n    \"thumbnail\": {\r\n        \"url\": \"http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350\",\r\n        \"extension\": \"jpg\"\r\n    },\r\n    \"urls\": [\r\n        {\r\n            \"detail\": \"detail\",\r\n            \"url\": \"http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        },\r\n        {\r\n            \"detail\": \"wiki\",\r\n            \"url\": \"http://marvel.com/universe/Thor_(Thor_Odinson)?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        },\r\n        {\r\n            \"detail\": \"comiclink\",\r\n            \"url\": \"http://marvel.com/comics/characters/1009664/thor?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "{{url_bff}}/characters/1004",
+					"host": [
+						"{{url_bff}}"
+					],
+					"path": [
+						"characters",
+						"1004"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Create Character 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 0,\r\n    \"name\": \"Thor\",\r\n    \"description\": \"As the Norse God of thunder and lightning, Thor wields one of the greatest weapons ever made, the enchanted hammer Mjolnir. While others have described Thor as an over-muscled, oafish imbecile, he's quite smart and compassionate.\",\r\n    \"thumbnail\": {\r\n        \"url\": \"http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350\",\r\n        \"extension\": \"jpg\"\r\n    },\r\n    \"urls\": [\r\n        {\r\n            \"detail\": \"detail\",\r\n            \"url\": \"http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        },\r\n        {\r\n            \"detail\": \"wiki\",\r\n            \"url\": \"http://marvel.com/universe/Thor_(Thor_Odinson)?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        },\r\n        {\r\n            \"detail\": \"comiclink\",\r\n            \"url\": \"http://marvel.com/comics/characters/1009664/thor?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "{{url_bff}}/characters",
+					"host": [
+						"{{url_bff}}"
+					],
+					"path": [
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Create Character 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 0,\r\n    \"name\": \"Thor (Goddess of Thunder)\",\r\n    \"description\": \"Thor (Goddess of Thunder)\",\r\n    \"thumbnail\": {\r\n        \"url\": \"http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350\",\r\n        \"extension\": \"jpg\"\r\n    },\r\n    \"urls\": [\r\n        {\r\n            \"detail\": \"detail\",\r\n            \"url\": \"http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        },\r\n        {\r\n            \"detail\": \"wiki\",\r\n            \"url\": \"http://marvel.com/universe/Thor_(Thor_Odinson)?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        },\r\n        {\r\n            \"detail\": \"comiclink\",\r\n            \"url\": \"http://marvel.com/comics/characters/1009664/thor?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        }\r\n    ]\r\n}    \r\n"
+				},
+				"url": {
+					"raw": "{{url_bff}}/characters",
+					"host": [
+						"{{url_bff}}"
+					],
+					"path": [
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Create Character 3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 0,\r\n    \"name\": \"Thor (MAA)\",\r\n    \"description\": \"Thor (MAA)\",\r\n    \"thumbnail\": {\r\n        \"url\": \"http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350\",\r\n        \"extension\": \"jpg\"\r\n    },\r\n    \"urls\": [\r\n        {\r\n            \"detail\": \"detail\",\r\n            \"url\": \"http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        },\r\n        {\r\n            \"detail\": \"wiki\",\r\n            \"url\": \"http://marvel.com/universe/Thor_(Thor_Odinson)?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        },\r\n        {\r\n            \"detail\": \"comiclink\",\r\n            \"url\": \"http://marvel.com/comics/characters/1009664/thor?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        }\r\n    ]\r\n}    \r\n"
+				},
+				"url": {
+					"raw": "{{url_bff}}/characters",
+					"host": [
+						"{{url_bff}}"
+					],
+					"path": [
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Create Character 4",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 0,\r\n    \"name\": \"Thor (Marvel Heroes)\",\r\n    \"description\": \"Thor (Marvel Heroes)\",\r\n    \"thumbnail\": {\r\n        \"url\": \"http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350\",\r\n        \"extension\": \"jpg\"\r\n    },\r\n    \"urls\": [\r\n        {\r\n            \"detail\": \"detail\",\r\n            \"url\": \"http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        },\r\n        {\r\n            \"detail\": \"wiki\",\r\n            \"url\": \"http://marvel.com/universe/Thor_(Thor_Odinson)?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        },\r\n        {\r\n            \"detail\": \"comiclink\",\r\n            \"url\": \"http://marvel.com/comics/characters/1009664/thor?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        }\r\n    ]\r\n}    \r\n"
+				},
+				"url": {
+					"raw": "{{url_bff}}/characters",
+					"host": [
+						"{{url_bff}}"
+					],
+					"path": [
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Create Character 5",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 0,\r\n    \"name\": \"Thor (Marvel War of Heroes)\",\r\n    \"description\": \"Thor (Marvel War of Heroes)\",\r\n    \"thumbnail\": {\r\n        \"url\": \"http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350\",\r\n        \"extension\": \"jpg\"\r\n    },\r\n    \"urls\": [\r\n        {\r\n            \"detail\": \"detail\",\r\n            \"url\": \"http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        },\r\n        {\r\n            \"detail\": \"wiki\",\r\n            \"url\": \"http://marvel.com/universe/Thor_(Thor_Odinson)?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        },\r\n        {\r\n            \"detail\": \"comiclink\",\r\n            \"url\": \"http://marvel.com/comics/characters/1009664/thor?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        }\r\n    ]\r\n}    \r\n"
+				},
+				"url": {
+					"raw": "{{url_bff}}/characters",
+					"host": [
+						"{{url_bff}}"
+					],
+					"path": [
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Create Character 6",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 0,\r\n    \"name\": \"Thor (Marvel: Avengers Alliance)\",\r\n    \"description\": \"Thor (Marvel: Avengers Alliance)\",\r\n    \"thumbnail\": {\r\n        \"url\": \"http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350\",\r\n        \"extension\": \"jpg\"\r\n    },\r\n    \"urls\": [\r\n        {\r\n            \"detail\": \"detail\",\r\n            \"url\": \"http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        },\r\n        {\r\n            \"detail\": \"wiki\",\r\n            \"url\": \"http://marvel.com/universe/Thor_(Thor_Odinson)?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        },\r\n        {\r\n            \"detail\": \"comiclink\",\r\n            \"url\": \"http://marvel.com/comics/characters/1009664/thor?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        }\r\n    ]\r\n}    \r\n"
+				},
+				"url": {
+					"raw": "{{url_bff}}/characters",
+					"host": [
+						"{{url_bff}}"
+					],
+					"path": [
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Create Character 7",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 0,\r\n    \"name\": \"Thor (Ultimate)\",\r\n    \"description\": \"Thor (Ultimate)\",\r\n    \"thumbnail\": {\r\n        \"url\": \"http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350\",\r\n        \"extension\": \"jpg\"\r\n    },\r\n    \"urls\": [\r\n        {\r\n            \"detail\": \"detail\",\r\n            \"url\": \"http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        },\r\n        {\r\n            \"detail\": \"wiki\",\r\n            \"url\": \"http://marvel.com/universe/Thor_(Thor_Odinson)?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        },\r\n        {\r\n            \"detail\": \"comiclink\",\r\n            \"url\": \"http://marvel.com/comics/characters/1009664/thor?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        }\r\n    ]\r\n}    \r\n"
+				},
+				"url": {
+					"raw": "{{url_bff}}/characters",
+					"host": [
+						"{{url_bff}}"
+					],
+					"path": [
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Create Character 8",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 0,\r\n    \"name\": \"Thor Girl\",\r\n    \"description\": \"Thor Girl\",\r\n    \"thumbnail\": {\r\n        \"url\": \"http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350\",\r\n        \"extension\": \"jpg\"\r\n    },\r\n    \"urls\": [\r\n        {\r\n            \"detail\": \"detail\",\r\n            \"url\": \"http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        },\r\n        {\r\n            \"detail\": \"wiki\",\r\n            \"url\": \"http://marvel.com/universe/Thor_(Thor_Odinson)?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        },\r\n        {\r\n            \"detail\": \"comiclink\",\r\n            \"url\": \"http://marvel.com/comics/characters/1009664/thor?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3\"\r\n        }\r\n    ]\r\n}    \r\n"
+				},
+				"url": {
+					"raw": "{{url_bff}}/characters",
+					"host": [
+						"{{url_bff}}"
+					],
+					"path": [
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Create Character Validator",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 0,\r\n    \"name\": \"Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor Thor \",\r\n    \"description\": \"As the Norse God of thunder and lightning, Thor wields one of the greatest weapons ever made, the enchanted hammer Mjolnir. While others have described Thor as an over-muscled, oafish imbecile, he's quite smart and compassionate. As the Norse God of thunder and lightning, Thor wields one of the greatest weapons ever made, the enchanted hammer Mjolnir. While others have described Thor as an over-muscled, oafish imbecile, he's quite smart and compassionate.\",\r\n    \"thumbnail\": {\r\n        \"url\": \"http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350 http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350 http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350 http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350 http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350 http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350 http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350 http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350\",\r\n        \"extension\": \"jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg jpg \"\r\n    },\r\n    \"urls\": [\r\n        {\r\n            \"detail\": \"detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail \",\r\n            \"url\": \"http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 \"\r\n        },\r\n        {\r\n            \"detail\": \"detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail \",\r\n            \"url\": \"http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 \"\r\n        },\r\n        {\r\n            \"detail\": \"detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail detail \",\r\n            \"url\": \"http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 http://marvel.com/characters/1009664/thor/featured?utm_campaign=apiRef&utm_source=f59dbe01285f1d360542b5c47a9516e3 \"\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "{{url_bff}}/characters",
+					"host": [
+						"{{url_bff}}"
+					],
+					"path": [
+						"characters"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
