@@ -6,6 +6,7 @@ import br.com.marvel.adapters.outbound.entity.UrlCharacterEntity;
 import br.com.marvel.controller.dto.characters.Character;
 import br.com.marvel.application.utils.Constants;
 import br.com.marvel.application.utils.JsonUtils;
+import br.com.marvel.controller.exception.dto.ApiMessageStatus;
 import br.com.marvel.utils.ResourceLoader;
 import br.com.marvel.utils.WireMockServers;
 import io.quarkus.test.junit.QuarkusTest;
@@ -17,7 +18,9 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static io.restassured.RestAssured.given;
 import static javax.ws.rs.core.Response.Status;
@@ -257,6 +260,98 @@ public class CharacterResourceTest {
 
         assertEquals(Constants.CHARACTER_NAME, name.get(0).toLowerCase());
         assertEquals(3, urls.get(0).size());
+    }
+
+    @Test
+    @Order(11)
+    @DisplayName("11 - Validando os campos de entrada estão Vazio ou Nulo")
+    public void testValidateEmptyFields() {
+        Response response = given()
+                .contentType(ContentType.JSON)
+                .body(ResourceLoader.loadFile(Constants.CHARACTER_VALIDATE_EMPTY_FIELDS))
+                .when()
+                .post("/characters")
+                .then()
+                .extract().response();
+
+        assertEquals(Status.BAD_REQUEST.getStatusCode(), response.statusCode());
+
+        ApiMessageStatus apiMessageStatus = (ApiMessageStatus) JsonUtils
+                .createObject(response.body().prettyPrint(), ApiMessageStatus.class);
+        String[] errors = apiMessageStatus.getDetail().split(",");
+
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.description: não deve estar em branco")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.description: não deve estar vazio")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.name: não deve estar em branco")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.name: não deve estar vazio")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.thumbnail.extension: não deve estar em branco")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.thumbnail.extension: não deve estar vazio")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.thumbnail.url: não deve estar em branco")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.thumbnail.url: não deve estar vazio")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.urlCharacters[0].type: não deve estar em branco")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.urlCharacters[0].type: não deve estar vazio")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.urlCharacters[0].url: não deve estar em branco")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.urlCharacters[0].url: não deve estar vazio")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.urlCharacters[1].type: não deve estar em branco")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.urlCharacters[1].type: não deve estar vazio")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.urlCharacters[1].url: não deve estar em branco")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.urlCharacters[1].url: não deve estar vazio")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.urlCharacters[2].type: não deve estar em branco")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.urlCharacters[2].type: não deve estar vazio")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.urlCharacters[2].url: não deve estar em branco")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.urlCharacters[2].url: não deve estar vazio")).count());
+    }
+
+    @Test
+    @Order(12)
+    @DisplayName("12 - Validando os campos de entrada Thumbnail e Urls")
+    public void testValidateThumbnailUrlsFields() {
+        Response response = given()
+                .contentType(ContentType.JSON)
+                .body(ResourceLoader.loadFile(Constants.CHARACTER_VALIDATE_THUMBNAIL_URLS_FIELDS))
+                .when()
+                .post("/characters")
+                .then()
+                .extract().response();
+
+        assertEquals(Status.BAD_REQUEST.getStatusCode(), response.statusCode());
+
+        ApiMessageStatus apiMessageStatus = (ApiMessageStatus) JsonUtils
+                .createObject(response.body().prettyPrint(), ApiMessageStatus.class);
+        String[] errors = apiMessageStatus.getDetail().split(",");
+
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.urlCharacters: não deve estar vazio")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.thumbnail: não deve ser nulo")).count());
+    }
+
+    @Test
+    @Order(13)
+    @DisplayName("13 - Validando os tamanhos dos campos de entrada")
+    public void testValidateSizeFields() {
+        Response response = given()
+                .contentType(ContentType.JSON)
+                .body(ResourceLoader.loadFile(Constants.CHARACTER_VALIDATE_SIZE_FIELDS))
+                .when()
+                .post("/characters")
+                .then()
+                .extract().response();
+
+        assertEquals(Status.BAD_REQUEST.getStatusCode(), response.statusCode());
+
+        ApiMessageStatus apiMessageStatus = (ApiMessageStatus) JsonUtils
+                .createObject(response.body().prettyPrint(), ApiMessageStatus.class);
+        String[] errors = apiMessageStatus.getDetail().split(",");
+
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.thumbnail.url: tamanho deve ser entre 0 e 255")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.urlCharacters[0].url: tamanho deve ser entre 0 e 255")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.urlCharacters[2].type: tamanho deve ser entre 0 e 255")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.urlCharacters[2].url: tamanho deve ser entre 0 e 255")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.urlCharacters[1].type: tamanho deve ser entre 0 e 255")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.urlCharacters[1].url: tamanho deve ser entre 0 e 255")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.name: tamanho deve ser entre 0 e 255")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.description: tamanho deve ser entre 0 e 255")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.thumbnail.extension: tamanho deve ser entre 0 e 255")).count());
+        assertEquals(1, Arrays.stream(errors).filter(p -> p.trim().equals("saveCharacters.character.urlCharacters[0].type: tamanho deve ser entre 0 e 255")).count());
     }
 
     private Character createCharacter(String file) {
