@@ -9,6 +9,7 @@ import br.com.marvel.controller.dto.characters.UrlCharacter;
 
 import java.util.Date;
 
+// TODO mapstruct
 public class CharacterEntityConverter {
 
     /**

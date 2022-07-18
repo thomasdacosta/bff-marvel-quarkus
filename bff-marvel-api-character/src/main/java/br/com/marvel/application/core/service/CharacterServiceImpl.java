@@ -181,9 +181,9 @@ public class CharacterServiceImpl implements CharacterServicePort {
                 Map<String, MessageAttributeValue> headers = new HashMap<>();
                 headers.put("character", MessageAttributeValue.builder().dataType("String").stringValue(JsonUtils.createJson(character)).build());
 
-                PublishResponse response = sns.publish(p -> p.topicArn("arn:aws:sns:us-east-1:000000000000:marvelThumbnailImageNotification")
-                        .messageAttributes(headers)
-                        .message(JsonUtils.createJson(thumbnailCharacter)));
+//                PublishResponse response = sns.publish(p -> p.topicArn("arn:aws:sns:us-east-1:000000000000:marvelThumbnailImageNotification")
+//                        .messageAttributes(headers)
+//                        .message(JsonUtils.createJson(thumbnailCharacter)));
 
                 List<UrlCharacter> urlCharacters = c.getUrls().stream().map(u -> {
                     UrlCharacter urlCharacter = new UrlCharacter();
